@@ -12,7 +12,7 @@ public class dna_to_protein {
 
     public static void main (String [] args) {
 
-        
+
 
 
     }
