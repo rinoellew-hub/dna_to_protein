@@ -4,15 +4,14 @@
  * Date: March 10th, 2024
  * Compiler: JDK 24.0.1
  * */
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 import java.util.*;
 import java.util.Random;
 
 public class dna_seq_gen {
 
-    public static void getSeq() throws FileNotFoundException {
+    public static void getSeq() throws IOException {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter the length that you want your random DNA non-coding sequence: ");
@@ -20,11 +19,19 @@ public class dna_seq_gen {
 
         int dna_len = scanner.nextInt();
 
+
         String [] arr = dnaSeq(dna_len);
 
-        PrintWriter output = new PrintWriter("dna.txt");
+        PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter("dna.txt", true)));
+        int index = 0;
         for (String s : arr) {
-            output.print(s);
+            output.print(s + " ");
+
+            if(index == arr.length - 1) {
+                output.println();
+            }
+
+            index++;
         }
         output.close();
 

@@ -5,15 +5,13 @@
  * Compiler: JDK 24.0.1
  * */
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 import java.util.*;
 
 public class dna_to_protein {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -37,28 +35,37 @@ public class dna_to_protein {
 
     }
 
-    public static void printFileMRNA(String [] str) throws FileNotFoundException {
+    public static void printFileMRNA(String [] str) throws IOException {
 
-            PrintWriter output = new PrintWriter("mrna.txt");
+        PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter("mrna.txt", true)));;
+        int index = 0;
+        for (String s : str) {
+            output.print(s + " ");
 
-            for (String s : str) {
-                    output.print(s + " ");
+            if(index == str.length - 1) {
+                output.println();
             }
+
+            index++;
+        }
+
         output.close();
+
 
     }
 
-    public static void printFileProtein(String [] str) throws FileNotFoundException {
-        PrintWriter output = new PrintWriter("protein.txt");
+    public static void printFileProtein(String [] str) throws IOException {
+        PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter("protein.txt", true)));
         int index = 0;
         for (String s : str) {
 
             if(index < str.length - 1) {
                 output.print(s + "-");
-            } else {
+            } else if (index == str.length - 1){
+                output.println();
+            }else {
                 output.print(s + " ");
             }
-
             index++;
         }
         output.close();
